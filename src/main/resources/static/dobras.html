@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Evolução Física - Dobras Cutâneas</title>
+    <style>
+    /* --- CONFIGURAÇÕES GERAIS --- */
+    body {
+        font-family: 'Segoe UI', Arial, sans-serif;
+        background-color: #A2D2FF;
+        padding: 40px 20px;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: #333;
+    }
+
+    /* --- LOGO --- */
+    .logo-top-wrapper {
+        margin-bottom: 20px;
+        z-index: 10;
+        text-align: center;
+        animation: float-intense 2.5s ease-in-out infinite;
+    }
+
+    .logo-img {
+        width: 130px;
+        height: 130px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 6px solid #ffffff;
+        outline: 3px solid #000080;
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+        background-color: #fff;
+    }
+
+    @keyframes float-intense {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-15px); }
+    }
+
+    h1, h2, h3 { color: #000080; text-align: center; }
+
+    .container {
+        width: 100%;
+        max-width: 1100px;
+        margin: 0 auto;
+    }
+
+    /* --- FORMULÁRIO --- */
+    .main-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+
+    .form-group-section {
+        padding: 23px;
+        border-radius: 15px;
+        background: #fff;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        border-top: 6px solid #000080;
+        min-height: 227px;
+    }
+
+    .section-blue { min-height: 480px; }
+
+    label {
+        display: block;
+        margin-top: 12px;
+        font-weight: 700;
+        font-size: 0.85em;
+        color: #000080;
+    }
+
+    input, select {
+        width: 100%;
+        padding: 12px;
+        margin-top: 6px;
+        border: 2px solid #eef2f7;
+        border-radius: 10px;
+        box-sizing: border-box;
+        transition: 0.3s;
+    }
+
+    input:focus {
+        outline: none;
+        border-color: #000080;
+        background-color: #f8faff;
+    }
+
+    /* --- BOTÕES --- */
+    .form-actions {
+        width: 100%;
+        max-width: 400px; /* Define a largura máxima do bloco de botões */
+        margin: 20px auto;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    #btn-save, #btn-cancel {
+        width: 100%; /* Ocupa toda a largura da div form-actions */
+        padding: 16px;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: 0.3s;
+        cursor: pointer;
+        border-radius: 10px;
+        border: none;
+        background: #000080;
+        color: white;
+        box-shadow: 0 4px 15px rgba(0, 0, 128, 0.3);
+        display: block; /* Garante o comportamento de bloco */
+    }
+
+    #btn-save:hover, #btn-cancel:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(0, 0, 128, 0.4);
+        filter: brightness(1.2);
+    }
+
+    .btn-home {
+        background: #000080;
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+        display: inline-block;
+        margin-bottom: 20px;
+        border-radius: 10px;
+        font-weight: bold;
+    }
+
+    /* --- ÁREA DE BUSCA --- */
+    .search-section {
+        margin: 40px 0 20px 0;
+        background: #fff;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        border-left: 8px solid #000080;
+    }
+
+    /* --- TABELA DE EVOLUÇÃO --- */
+    #tabela-container {
+        width: 100%;
+        overflow-x: auto;
+        background: #fff;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        margin-bottom: 50px;
+    }
+
+    .evolution-table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 800px;
+    }
+
+    .evolution-table th, .evolution-table td {
+        padding: 18px;
+        text-align: center;
+        border-bottom: 1px solid #f0f4f8;
+    }
+
+    .param-column {
+        background-color: #f8faff !important;
+        color: #000080;
+        font-weight: 800;
+        text-align: left !important;
+        position: sticky;
+        left: 0;
+        z-index: 2;
+        border-right: 2px solid #eef2f7;
+        width: 220px;
+    }
+
+    .evolution-table thead th {
+        background-color: #ffffff;
+        color: #000080;
+        border-bottom: 3px solid #eef2f7;
+    }
+
+    .header-date {
+        display: block;
+        font-size: 1.1em;
+        font-weight: bold;
+        margin-bottom: 8px;
+    }
+
+    .diff-text {
+        display: inline-block;
+        margin-left: 10px;
+        padding: 4px 8px;
+        border-radius: 8px;
+        font-size: 0.75em;
+        font-weight: bold;
+    }
+
+    .diff-neg { background: #d4f8e8; color: #1a7f55; border: 1px solid #b2f5ea; }
+    .diff-pos { background: #ffe5e5; color: #d63031; border: 1px solid #feb2b2; }
+
+    .header-actions {
+        display: flex;
+        gap: 8px;
+        justify-content: center;
+    }
+
+    .btn-edit-header, .btn-delete-header {
+        padding: 6px 12px;
+        border-radius: 6px;
+        font-size: 11px;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+        background: #000080;
+        color: #fff;
+        transition: 0.2s;
+    }
+
+    @media (max-width: 850px) {
+        .main-grid { grid-template-columns: 1fr; }
+        .section-blue { min-height: auto; }
+    }
+</style>
+</head>
+<body>
+
+    <div class="logo-top-wrapper">
+        <img src="img/logo.png" alt="Logo Academia" class="logo-img">
+    </div>
+
+    <div class="container">
+        <a href="telaMenu.html" class="btn-home">⬅ Voltar ao Menu</a>
+        
+        <h1>Avaliações Físicas (Dobras Cutâneas)</h1>
+
+        <div class="form-section">
+            <h2 id="form-title">Nova Avaliação</h2>
+
+            <form id="dobras-form">
+                <input type="hidden" id="dobras-id">
+
+                <div class="main-grid">
+                    <div class="column">
+                        <div class="form-group-section section-blue">
+                            <h3>Geral e Tronco</h3>
+                            <label for="aluno-id">Aluno:</label>
+                            <select id="aluno-id" required>
+                                <option value="" disabled selected>Carregando alunos...</option>
+                            </select>
+
+                            <label for="data">Data:</label>
+                            <input type="date" id="data" required>
+
+                            <label>Subescapular (mm):</label>
+                            <input type="number" step="0.1" id="subescapular" required>
+                            
+                            <label>Suprailiaca (mm):</label>
+                            <input type="number" step="0.1" id="suprailiaca" required>
+                            
+                            <label>Abdominal (mm):</label>
+                            <input type="number" step="0.1" id="abdominal" required>
+
+                            <label>Peitoral (mm):</label>
+                            <input type="number" step="0.1" id="peitoral" required>
+                        </div>
+                    </div>
+
+                    <div class="column">
+                        <div class="form-group-section">
+                            <h3>Membros Superiores</h3>
+                            <label>Bíceps (mm):</label>
+                            <input type="number" step="0.1" id="biceps" required>
+                            
+                            <label>Tríceps (mm):</label>
+                            <input type="number" step="0.1" id="triceps" required>
+                        </div>
+
+                        <div class="form-group-section" style="margin-top: 20px;">
+                            <h3>Membros Inferiores</h3>
+                            <label>Coxa (mm):</label>
+                            <input type="number" step="0.1" id="coxa" required>
+                            
+                            <label>Panturrilha Medial (mm):</label>
+                            <input type="number" step="0.1" id="panturrilhaMedial" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" id="btn-save">Salvar Dobras</button>
+                    <button type="button" id="btn-cancel" onclick="resetForm()" style="display: none;">Cancelar Edição</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="search-section" id="area-busca-aluno">
+            <label for="aluno-id-search" style="margin-top: 0;">Filtrar Evolução por Aluno:</label>
+            <select id="aluno-id-search" onchange="carregarEvolucao()">
+                <option value="">Selecione um aluno para ver a evolução...</option>
+            </select>
+        </div>
+
+        <div id="tabela-container"></div>
+    </div>
+
+    <script src="dobras.js"></script>
+</body>
+</html>

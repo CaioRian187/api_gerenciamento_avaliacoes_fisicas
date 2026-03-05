@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro - Academia</title>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Arial, sans-serif; 
+            background-color: #A2D2FF; 
+            padding: 40px 20px; /* Padding maior para acomodar a logo no mobile */
+            display: flex; 
+            flex-direction: column; /* Alinha logo e container em coluna */
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            margin: 0; 
+        }
+
+        /* --- LOGO IDENTICA À TELA DE LOGIN --- */
+        .logo-top-wrapper {
+            margin-bottom: 30px; 
+            z-index: 10; 
+            text-align: center;
+            animation: float-intense 2.5s ease-in-out infinite; 
+        }
+
+        .logo-img {
+            width: 140px; 
+            height: 140px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 6px solid #ffffff; 
+            outline: 3px solid #000080;
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+            background-color: #fff;
+        }
+
+        @keyframes float-intense {
+            0% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-25px) scale(1.05); }
+            100% { transform: translateY(0px) scale(1); }
+        }
+
+        .container { 
+            width: 100%; 
+            max-width: 400px; 
+            background: white; 
+            padding: 35px; 
+            border-radius: 24px; 
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); 
+            border-top: 6px solid #000080; /* Padronização visual */
+        }
+
+        h1 { color: #000080; text-align: center; margin-bottom: 20px; font-size: 1.6em; }
+        form { display: flex; flex-direction: column; }
+        
+        label { 
+            margin-top: 15px; 
+            font-weight: bold; 
+            color: #000080; 
+            font-size: 0.85em;
+            margin-left: 5px;
+        }
+        
+        input, select { 
+            padding: 12px; 
+            margin-top: 6px; 
+            border: 2px solid #eef2f7; 
+            border-radius: 12px; 
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #000080;
+            background-color: #f8faff;
+            box-shadow: 0 0 0 4px rgba(0, 0, 80, 0.1);
+        }
+
+        button { 
+            padding: 14px; 
+            cursor: pointer; 
+            border: none; 
+            border-radius: 12px; 
+            background: #000080; 
+            color: white; 
+            margin-top: 25px; 
+            font-weight: bold; 
+            font-size: 1em;
+            box-shadow: 0 4px 12px rgba(0, 0, 80, 0.2);
+            transition: all 0.3s;
+        }
+
+        button:hover { 
+            opacity: 0.95; 
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 80, 0.3);
+        }
+
+        .btn-back { 
+            display: block; 
+            text-align: center; 
+            margin-top: 20px; 
+            font-size: 0.9em; 
+            color: #000080; 
+            font-weight: bold; 
+            text-decoration: none; 
+        }
+
+        .btn-back:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="logo-top-wrapper">
+        <img src="img/logo.png" alt="Logo Academia" class="logo-img">
+    </div>
+
+    <div class="container">
+        <h1>Criar Conta</h1>
+        <form id="register-form">
+            <label>Nome Completo:</label>
+            <input type="text" id="reg-nome" placeholder="Seu nome completo" required>
+
+            <label>Idade:</label>
+            <input type="number" id="reg-idade" placeholder="Ex: 25" required>
+
+            <label>Sexo:</label>
+            <select id="reg-sexo" required>
+                <option value="" disabled selected>Selecione...</option>
+                <option value="Masculino">Masculino</option>
+                <option value="Feminino">Feminino</option>
+                <option value="Outro">Outro</option>
+            </select>
+
+            <label>Login (Usuário):</label>
+            <input type="text" id="reg-login" placeholder="Escolha um usuário" required>
+
+            <label>Senha:</label>
+            <input type="password" id="reg-password" placeholder="Crie uma senha" required>
+
+            <button type="submit">Finalizar Cadastro</button>
+        </form>
+        <a href="index.html" class="btn-back">Já tenho conta? Ir para Login</a>
+    </div>
+
+    <script src="cadastrarScript.js"></script>
+</body>
+</html>
