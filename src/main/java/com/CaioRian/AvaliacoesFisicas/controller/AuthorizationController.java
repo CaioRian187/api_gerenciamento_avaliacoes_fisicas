@@ -34,6 +34,7 @@ public class AuthorizationController {
         return ResponseEntity.ok().build();
     }
 
+    @PostMapping("/cadastrar")
     public ResponseEntity cadastrar(@RequestBody @Valid CadastroDto dto){
         if (this.userRepository.findByLogin(dto.login()) != null) return ResponseEntity.badRequest().build();
 
