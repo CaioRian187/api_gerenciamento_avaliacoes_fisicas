@@ -36,6 +36,15 @@ public class User implements UserDetails {
 
     private UserRole role;
 
+    public User(String nome, Integer idade, String sexo, String login, String password, UserRole role) {
+        this.nome = nome;
+        this.idade = idade;
+        this.sexo = sexo;
+        this.login = login;
+        this.password = password;
+        this.role = role;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         if (this.role == UserRole.ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
