@@ -3,8 +3,10 @@ package com.CaioRian.AvaliacoesFisicas.controller;
 import com.CaioRian.AvaliacoesFisicas.models.User;
 import com.CaioRian.AvaliacoesFisicas.models.dto.AuthenticationDto;
 import com.CaioRian.AvaliacoesFisicas.models.dto.CadastroDto;
+import com.CaioRian.AvaliacoesFisicas.models.dto.LoginResponseDto;
 import com.CaioRian.AvaliacoesFisicas.models.enums.UserRole;
 import com.CaioRian.AvaliacoesFisicas.repository.UserRepository;
+import com.CaioRian.AvaliacoesFisicas.security.TokenService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,12 +28,17 @@ public class AuthorizationController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private TokenService tokenService;
+
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody @Valid AuthenticationDto data){
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.login(), data.password());
         var auth = this.authenticationManager.authenticate(usernamePassword);
 
-        return ResponseEntity.ok().build();
+        var token = this.tokenService.generateToken((User) auth.getPrincipal());
+
+        return ResponseEntity.ok(new LoginResponseDto(token));
     }
 
     @PostMapping("/cadastrar")
